@@ -1,3 +1,6 @@
+;@DESC This is a template shell for CQX96
+;@NAME Shell
+
 ; THIS IS A SHELL TEMPLATE. YOU CAN USE IT TO CREATE YOUR
 ; OWN CQX96 SHELL.
 
@@ -19,37 +22,36 @@ shell:
 	mov ax, input
 	call 001Bh      ; Kernel API: CHOMP
 	mov si, input
+	call 0060h
 	mov bx, 0
 	mov cx, 40960
 	call 0018h
 	jc .tryprgext
-	mov ax, 0
-	mov bx, 0
-	mov cx, 0
-	mov dx, 0
+	mov si, input
+	call 0060h
 	mov si, 0
 	mov di, 0
 	call 40960
   jmp shell
   .tryprgext:
-    mov ax, input
+      mov ax, input
 	  mov bx, prg
 	  mov cx, input
 	  call join
 	  mov ax, input
 	  call 001Bh      ; Kernel API: CHOMP
-  	mov si, input
+  	  mov si, input
 	  mov bx, 0
 	  mov cx, 40960
 	  call 0018h      ; Kernel API: LOAD_FILE
 	  jc exit
 	  mov ax, 0
-  	mov bx, 0
-  	mov cx, 0
+  	  mov bx, 0
+  	  mov cx, 0
 	  mov dx, 0
-  	mov si, 0
-  	mov di, 0
-  	call 40960
+  	  mov si, 0
+  	  mov di, 0
+  	  call 40960
   jmp shell
 exit:
 jmp shell
